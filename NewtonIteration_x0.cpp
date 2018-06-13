@@ -28,15 +28,14 @@ double dfunc(double x)
 
 int main(int argc, char** argv)
 {
-    double epsilon, x0, x1, fx0, dfx0, xret;
-    long i;
+    double epsilon, x0, x1, fx0, dfx0;
+    long i, maxi;
     cout << "请输入精度要求:";
     cin >> epsilon;
     cout << "请输入迭代初值:";
     cin >> x1;
-    cout << "请输入方程的真正根用于分析比较误差:";
-    cin >> xret;
-    cout << "最大迭代次数默认50." << endl;
+    cout << "最大迭代次数默认:";
+    cin >> maxi;
     dfx0 = dfunc(x0);       //important!!!
     for(i = 0; i < MAXI; ++i)
     {
@@ -44,11 +43,11 @@ int main(int argc, char** argv)
         fx0 = func(x0);
         //dfx0 = dfunc(x0);     // removed
         x1 = x0 - fx0/dfx0;
-        cout << "step" << i <<" 误差:" <<x1 - xret << endl;
+        cout << "step" << i <<" 误差:" << x1 - x0 << endl;
         if(fabs(x1-x0) <= epsilon)
             break;
     }
-    if(i < MAXI)
+    if(i < maxi)
         cout << "方程f(x)=0的根x=" << x1 << endl;
     else
         cout << "迭代次数已达上限." << endl;
